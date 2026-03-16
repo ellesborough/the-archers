@@ -1,8 +1,9 @@
 ---
 layout: default
-title: All Archers
+title: All Characters
 ---
 {% assign ordered_characters = site.archers | sort: "family_name" %}
+<h1>All Characters</h1>
 <table>
 <tr>
     <th>Forenames</th>
@@ -21,7 +22,7 @@ title: All Archers
     </td>
     <td>{{archer.date_of_birth}}</td>
     <td>{{archer.date_of_death}}</td>
-    <td><a href="{{site.baseurl}}{{ archer.url }}">Details</a></td>
+    <td><a href="{{site.baseurl}}{{ archer.url }}">Details</a><br/><small>{{archer.nid}}</small></td>
 
 </tr>
 
