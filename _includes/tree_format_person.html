@@ -20,13 +20,28 @@
             {%- capture spouse_gender_class %}
             {%- if spouse.gender == "male" %}archer-male{%- elsif spouse.gender == "female" %}archer-female{%- endif %}
             {%- endcapture %}
-<div class='spouse-inner {{spouse_gender_class}}'>
-    {{spouse.forenames}}<br><b>{{spouse.family_name}}</b>
-    <a href='{{site.baseurl}}{{spouse.url}}'><i class='fa fa-address-card'></i></a>
-    <a href='{{site.baseurl}}{{spouse.url}}#tree'><i class='fa fa-sitemap'></i></a>
-    <a href='{{site.baseurl}}{{spouse.url}}#pedigree'><i class='fa fa-share-alt fa-rotate-270'></i></a>
-</div>
+            <div class='spouse-inner {{spouse_gender_class}}'>
+                {{spouse.forenames}}<br><b>{{spouse.family_name}}</b>
+                <a href='{{site.baseurl}}{{spouse.url}}'><i class='fa fa-address-card'></i></a>
+                <a href='{{site.baseurl}}{{spouse.url}}#tree'><i class='fa fa-sitemap'></i></a>
+                <a href='{{site.baseurl}}{{spouse.url}}#pedigree'><i class='fa fa-share-alt fa-rotate-270'></i></a>
+            </div>
         {%- endif %}
     {%- endfor %}
-{%- endif %}
+
+    {%- for partner_id in include.person.partner -%}
+        {%- assign partner = include.all_characters | where: "nid", partner_id | first %}
+        {%- if partner %}
+            {%- capture partner_gender_class %}
+            {%- if partner.gender == "male" %}archer-male-partner{%- elsif partner.gender == "female" %}archer-female-partner{%- endif %}
+            {%- endcapture %}
+            <div class='spouse-inner {{partner_gender_class}}'>
+                {{partner.forenames}}<br><b>{{partner.family_name}}</b>
+                <a href='{{site.baseurl}}{{partner.url}}'><i class='fa fa-address-card'></i></a>
+                <a href='{{site.baseurl}}{{partner.url}}#tree'><i class='fa fa-sitemap'></i></a>
+                <a href='{{site.baseurl}}{{partner.url}}#pedigree'><i class='fa fa-share-alt fa-rotate-270'></i></a>
+            </div>
+        {%- endif %}
+    {%- endfor %}
 </div>
+{%- endif %}
