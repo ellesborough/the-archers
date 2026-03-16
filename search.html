@@ -1,0 +1,19 @@
+---
+layout: default
+title: Search
+---
+<!-- HTML elements for search -->
+<input type="text" id="search-input" placeholder="Search for characters..">
+<div>
+<ul id="results-container"></ul>
+</div>
+
+<script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>
+
+<script>
+var sjs = SimpleJekyllSearch({
+  searchInput: document.getElementById('search-input'),
+  resultsContainer: document.getElementById('results-container'),
+  json: '{{ site.baseurl }}/search.json'
+})
+</script>

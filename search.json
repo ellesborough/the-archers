@@ -1,0 +1,12 @@
+---
+layout: none
+---
+[
+  {% for archer in site.archers %}
+    {
+      "title"    : "{{ archer.title | escape }}",
+      "url"      : "{{ site.baseurl }}{{ archer.url }}",
+      "date"     : "{{ archer.changed }}"
+    } {% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]
