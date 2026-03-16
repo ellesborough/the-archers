@@ -2,3 +2,13 @@
     font-weight: bold;
     color: green;
 }
+
+.archer-calendar-birthday {
+    background-color: #f5c4c4;
+    color: black;
+}
+
+.archer-calendar-death {
+    background-color: lightgrey;
+    color: black;
+}

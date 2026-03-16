@@ -1,0 +1,85 @@
+---
+layout: default
+title: Calendar
+---
+
+<div id="activity_calendar"></div>
+
+<script>
+
+// See https://github.com/vkurko/calendar
+
+var events = [
+  {%- for archer in site.archers -%}
+    {%- if archer.date_of_birth and archer.date_of_birth.size != 0 -%}
+        {
+            "id"            : "{{archer.nid}}-birthday",
+            "title"         : "{{archer.title}}",
+            "dob_str"       : "{{archer.date_of_birth}}",
+            "allDay"        : true,
+            "editable"      : false,
+            "classNames"    : "archer-calendar-birthday",
+            "extendedProps" : { "url" : "{{site.baseurl}}{{ archer.url }}" }
+        } {% unless forloop.last %},{% endunless %}
+    {%- endif -%}
+    {%- if archer.date_of_death and archer.date_of_death.size != 0 -%}
+        {
+            "id"            : "{{archer.nid}}-death",
+            "title"         : "{{archer.title}}",
+            "dod_str"       : "{{archer.date_of_death}}",
+            "allDay"        : true,
+            "editable"      : false,
+            "classNames"    : "archer-calendar-death",
+            "extendedProps" : { "url" : "{{site.baseurl}}{{ archer.url }}" }
+        } {% unless forloop.last %},{% endunless %}
+    {%- endif -%}
+  {%- endfor -%}
+];
+
+// Markdown DoB and DoD are 'partial' dates, so may not have month and date
+all_events = events.filter((v) => v.dob_str?.split('-').length >= 3).map(v => {
+
+    let d = new Date(Date.parse(v.dob_str));
+    let now = new Date();
+    v.extendedProps.birth_year = d.getFullYear();
+    v.start = now.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate() ;
+    v.end = v.start;
+    return v;
+});
+
+all_events = all_events.concat(events.filter((v) => v.dod_str?.split('-').length >= 3).map(v => {
+
+    let d = new Date(Date.parse(v.dod_str));
+    let now = new Date();
+    v.extendedProps.death_year = d.getFullYear();
+    v.start = now.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate() ;
+    v.end = v.start;
+    return v;
+}));
+
+
+var ec = EventCalendar.create(document.getElementById('activity_calendar'), {
+  view: 'dayGridMonth',
+  headerToolbar: {
+    start: 'prev,next',
+    center: 'title',
+    end: 'today'
+  },
+  locale: 'en-GB', // triggers 24-hour time formats
+  events: all_events,
+  eventClick: function (info) {
+    window.location.href = info.event.extendedProps.url;
+  },
+  eventContent: function (info) {
+
+    let html = '<div class="calendar-event ' + info.event.classNames + ' ">'
+                  + info.event.title
+                  + (info.event.extendedProps.birth_year ? (" (b. " + info.event.extendedProps.birth_year + ")") : "")
+                  + (info.event.extendedProps.death_year ? (" (d. " + info.event.extendedProps.death_year + ")") : "")
+                +'</div>';
+
+    return { html: html }
+}
+});
+
+</script>
