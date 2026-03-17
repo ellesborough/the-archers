@@ -75,11 +75,11 @@ layout: default
 {%- endif -%}
 
 {%- if page.date_of_birth and page.date_of_birth.size != 0 -%}
-<p><span class="field-name">Date of Birth:</span> {{page.date_of_birth}}</p>
+<p><span class="field-name">Date of Birth: </span> {%- include format_partial_date.html date_str=page.date_of_birth -%}</p>
 {%- endif -%}
 
 {%- if page.date_of_death and page.date_of_death.size != 0 -%}
-<p><span class="field-name">Date of Death:</span> {{page.date_of_death}}</p>
+<p><span class="field-name">Date of Death: </span> {%- include format_partial_date.html date_str=page.date_of_death -%}</p>
 {%- endif -%}
 
 {%- if page.actor and page.actor.size != 0 -%}

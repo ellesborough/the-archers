@@ -20,8 +20,9 @@ title: All Characters
             , née {{archer.maiden_name}}
         {% endif %}
     </td>
-    <td>{{archer.date_of_birth}}</td>
-    <td>{{archer.date_of_death}}</td>
+    <td>{%- include format_partial_date.html date_str=archer.date_of_birth -%}</td>
+    <td>{%- include format_partial_date.html date_str=archer.date_of_death -%}</td>
+
     <td><a href="{{site.baseurl}}{{ archer.url }}">Details</a><br/><small>{{archer.nid}}</small></td>
 
 </tr>
