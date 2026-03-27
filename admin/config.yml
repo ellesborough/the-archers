@@ -39,8 +39,8 @@ collections:
       - {label: "Children",      name: "children",      widget: "relation", required: false, collection: "archers", value_field: "nid", search_fields: ["title"], display_fields: ["title"], multiple: true }
       - {label: "Spouses",       name: "spouse",        widget: "relation", required: false, collection: "archers", value_field: "nid", search_fields: ["title"], display_fields: ["title"], multiple: true }
       - {label: "Partners",      name: "partner",       widget: "relation", required: false, collection: "archers", value_field: "nid", search_fields: ["title"], display_fields: ["title"], multiple: true }
-      - {label: "Date of birth", name: "date_of_birth", widget: "datetime", required: false, type: date, date_format: "YYYY-MM-DD" }
-      - {label: "Date of death", name: "date_of_death", widget: "datetime", required: false, type: date, date_format: "YYYY-MM-DD" }
+      - {label: "Date of birth", name: "date_of_birth", widget: "string",   required: false, pattern: ['^$|^[12]\d{3}(?:(?:-(?:0[1-9]|1[0-2]))(?:-(?:0[1-9]|[12]\d|3[01]))?)?$', 'Format must be YYYY, YYYY-MM or YYYY-MM-DD'], hint: 'YYYY, YYYY-MM or YYYY-MM-DD '}
+      - {label: "Date of death", name: "date_of_death", widget: "string",   required: false, pattern: ['^$|^[12]\d{3}(?:(?:-(?:0[1-9]|1[0-2]))(?:-(?:0[1-9]|[12]\d|3[01]))?)?$', 'Format must be YYYY, YYYY-MM or YYYY-MM-DD'], hint: 'YYYY, YYYY-MM or YYYY-MM-DD '}
       - {label: "Actor",         name: "actor",         widget: "list",     required: false, summary: "{{fields.actor}}", field: {label: Actor, name: actor, widget: string} }
 
       - {label: "Body",          name: "body",          widget: "markdown", required: false }
