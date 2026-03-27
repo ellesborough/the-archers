@@ -1,6 +1,22 @@
 {%- assign date_parts = include.date_str | split: '-' -%}
 {%- if date_parts.size == 3 -%}
-    {{include.date_str | date: '%e %b %Y'}}
+    {{include.date_str | date: '%e %B %Y'}}
+{%- elsif date_parts.size == 2 -%}
+    {% case date_parts[1] %}
+        {%- when "01" -%}January {{date_parts[0]}}
+        {%- when '02' -%}February {{date_parts[0]}}
+        {%- when '03' -%}March {{date_parts[0]}}
+        {%- when '04' -%}April {{date_parts[0]}}
+        {%- when '05' -%}May {{date_parts[0]}}
+        {%- when '06' -%}June {{date_parts[0]}}
+        {%- when '07' -%}July {{date_parts[0]}}
+        {%- when '08' -%}August {{date_parts[0]}}
+        {%- when '09' -%}September {{date_parts[0]}}
+        {%- when '10' -%}October {{date_parts[0]}}
+        {%- when '11' -%}November {{date_parts[0]}}
+        {%- when '12' -%}December {{date_parts[0]}}
+        {%- else -%} {{include.date_str}}
+    {%- endcase -%}
 {%- else -%}
     {{include.date_str}}
 {%- endif -%}
