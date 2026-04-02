@@ -27,6 +27,13 @@ github_username:  ellesborough
 
 exclude: [import]
 
+header_pages:
+    - all_archers.html
+    - calendar.html
+    - search.html
+    - about.markdown
+
+
 collections:
   archers:
     output: true
